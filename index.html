@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoObra</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- TELA INICIAL -->
+<div id="start" class="card page active">
+    <img class="logo" src="https://via.placeholder.com/130" alt="EcoObra Logo">
+    <h1>EcoObra</h1>
+    <p class="lead">Gestão sustentável de resíduos da construção civil</p>
+    <button class="btn btn-primary" id="btn-login">Entrar</button>
+    <button class="btn btn-secondary" id="btn-register">Criar Conta</button>
+</div>
+
+<!-- LOGIN -->
+<div id="login" class="card page">
+    <h1>Login</h1>
+    <input id="login-username" type="text" class="input" placeholder="Usuário">
+    <input id="login-password" type="password" class="input" placeholder="Senha">
+    <button class="btn btn-primary" id="do-login">Entrar</button>
+    <button class="btn btn-ghost" id="back-login">Voltar</button>
+</div>
+
+<!-- CADASTRO -->
+<div id="register" class="card page">
+    <h1>Criar Conta</h1>
+    <input id="reg-username" type="text" class="input" placeholder="Usuário">
+    <input id="reg-password" type="password" class="input" placeholder="Senha">
+    <button class="btn btn-secondary" id="do-register">Cadastrar</button>
+    <button class="btn btn-ghost" id="back-register">Voltar</button>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="card page">
+    <h1>Dashboard</h1>
+    <p>Bem-vindo, <span id="user-name"></span></p>
+    <div class="stats">
+        <div>Resíduos registrados: <span id="residuos">0</span> kg</div>
+        <div>Coletas agendadas: <span id="coletas">0</span></div>
+    </div>
+    <button class="btn btn-primary" id="logout">Sair</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
