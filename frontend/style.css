@@ -1,68 +1,134 @@
-* {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 body {
-    font-family: Arial;
-    background:#f0f2f5;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-
-.card {
-    background:#fff;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.15);
-    width:320px;
-    text-align:center;
-}
-
-.logo {
-    width:130px; 
-    height:130px; 
-    margin-bottom:12px;
-}
-.input {
-    width:100%; 
-    padding:10px; 
-    margin:8px 0; 
-    border-radius:8px; 
-    border:1px solid #ccc;
-}
-.btn {
-    width:100%; 
-    padding:12px; 
-    margin-top:8px; 
-    border:none; 
-    border-radius:10px; 
-    cursor:pointer; 
-    font-size:15px;
-}
-.btn-primary {
-    background:#2e8b57; 
-    color:white;
-}
-.btn-secondary {
-    background:#1e90ff; 
-    color:white;
-}
-.btn-ghost {
-    background:transparent; 
-    border:1px solid #ccc; 
-    color:#333;
-}
-.page {
-    display:none;
-}
-.page.active {
-    display:block;
-}
-.stats {
-    text-align:left;
-    margin-top:12px;
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #0a0f1f, #1a2340);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Poppins", sans-serif;
+        color: #fff;
     }
+
+    .phone {
+        width: min(390px, 90vw);        /* Ajusta a largura conforme o celular */
+        height: 100dvh;                 /* Altura real da tela em celulares */
+        max-height: 900px;              /* Segurança extra */
+        background: rgba(255,255,255,0.06);
+        backdrop-filter: blur(12px);
+        border-radius: 32px;
+        border: 1px solid rgba(255,255,255,0.2);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    }
+
+
+    .header {
+        text-align: center;
+        padding: 35px 0;
+        background: rgba(255,255,255,0.05);
+        font-size: 22px;
+        letter-spacing: 1px;
+        font-weight: 600;
+    }
+
+    .screen {
+        flex: 1;
+        display: none;
+        padding: 30px;
+        animation: fade .4s;
+        overflow-y: hidden;
+    }
+
+    #telaCadastroEmpresa {
+        overflow-y: auto;
+    }
+
+    @keyframes fade {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .visible { display: block; }
+
+    button {
+        width: 100%;
+        padding: 16px;
+        margin-top: 20px;
+        border-radius: 16px;
+        border: none;
+        background: #4a7fff;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #6a96ff;
+    }
+
+    .input-group {
+        margin-top: 18px;
+    }
+
+    input {
+        width: 100%;
+        padding: 14px;
+        border-radius: 14px;
+        border: none;
+        background: rgba(255,255,255,0.10);
+        color: white;
+        font-size: 15px;
+        outline: none;
+        margin-top: 6px;
+    }
+
+    label {
+        font-size: 14px;
+        opacity: 0.8;
+    }
+
+    .link {
+        margin-top: 15px;
+        text-align: center;
+        opacity: 0.8;
+        cursor: pointer;
+    }
+
+    .link:hover {
+        opacity: 1;
+        text-decoration: underline;
+    }
+
+    .users-box {
+        margin-top: 20px;
+        background: rgba(255,255,255,0.07);
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .upload-box {
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 16px;
+        background: rgba(255,255,255,0.08);
+        text-align: center;
+    }
+
+    .preview {
+        width: 100%;
+        margin-top: 15px;
+        border-radius: 16px;
+        display: none;
+    }
+
+    .back-btn {
+        text-align: left;
+        margin-bottom: 10px;
+        cursor: pointer;
+        opacity: 0.7;
+    }
+    .back-btn:hover { opacity: 1; }

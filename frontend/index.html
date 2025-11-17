@@ -1,51 +1,335 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EcoObra</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StructIA</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #0a0f1f, #1a2340);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Poppins", sans-serif;
+        color: #fff;
+    }
+
+    .phone {
+        width: min(390px, 90vw);        /* Ajusta a largura conforme o celular */
+        height: 100dvh;                 /* Altura real da tela em celulares */
+        max-height: 900px;              /* Segurança extra */
+        background: rgba(255,255,255,0.06);
+        backdrop-filter: blur(12px);
+        border-radius: 32px;
+        border: 1px solid rgba(255,255,255,0.2);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    }
+
+
+    .header {
+        text-align: center;
+        padding: 35px 0;
+        background: rgba(255,255,255,0.05);
+        font-size: 22px;
+        letter-spacing: 1px;
+        font-weight: 600;
+    }
+
+    .screen {
+        flex: 1;
+        display: none;
+        padding: 30px;
+        animation: fade .4s;
+        overflow-y: hidden;
+    }
+
+    #telaCadastroEmpresa {
+        overflow-y: auto;
+    }
+
+    @keyframes fade {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .visible { display: block; }
+
+    button {
+        width: 100%;
+        padding: 16px;
+        margin-top: 20px;
+        border-radius: 16px;
+        border: none;
+        background: #4a7fff;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #6a96ff;
+    }
+
+    .input-group {
+        margin-top: 18px;
+    }
+
+    input {
+        width: 100%;
+        padding: 14px;
+        border-radius: 14px;
+        border: none;
+        background: rgba(255,255,255,0.10);
+        color: white;
+        font-size: 15px;
+        outline: none;
+        margin-top: 6px;
+    }
+
+    label {
+        font-size: 14px;
+        opacity: 0.8;
+    }
+
+    .link {
+        margin-top: 15px;
+        text-align: center;
+        opacity: 0.8;
+        cursor: pointer;
+    }
+
+    .link:hover {
+        opacity: 1;
+        text-decoration: underline;
+    }
+
+    .users-box {
+        margin-top: 20px;
+        background: rgba(255,255,255,0.07);
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .upload-box {
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 16px;
+        background: rgba(255,255,255,0.08);
+        text-align: center;
+    }
+
+    .preview {
+        width: 100%;
+        margin-top: 15px;
+        border-radius: 16px;
+        display: none;
+    }
+
+    .back-btn {
+        text-align: left;
+        margin-bottom: 10px;
+        cursor: pointer;
+        opacity: 0.7;
+    }
+    .back-btn:hover { opacity: 1; }
+
+    .user-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 10px;
+        margin-bottom: 6px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 8px;
+    }
+
+    .delete-btn {
+        background: #ff4a4a;
+        border: none;
+        border-radius: 4px;
+        padding: 2px 4px;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+
+    .delete-btn:hover {
+        background: #ff6a6a;
+    }
+    
+    .chat-box {
+        margin-top: 15px;
+        height: 250px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 12px;
+        padding: 12px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .msg {
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        border-radius: 12px;
+        max-width: 80%;
+        word-wrap: break-word;
+    }
+
+    .msg.user {
+        background: #4a7fff;
+        color: white;
+        align-self: flex-end;
+        text-align: right;
+    }
+
+    .msg.gpt {
+        background: rgba(255,255,255,0.2);
+        color: black;
+        align-self: flex-start;
+        text-align: left;
+    }
+
+</style>
 </head>
 <body>
+<div class="phone">
 
-<!-- TELA INICIAL -->
-<div id="start" class="card page active">
-    <img class="logo" src="https://via.placeholder.com/130" alt="EcoObra Logo">
-    <h1>EcoObra</h1>
-    <p class="lead">Gestão sustentável de resíduos da construção civil</p>
-    <button class="btn btn-primary" id="btn-login">Entrar</button>
-    <button class="btn btn-secondary" id="btn-register">Criar Conta</button>
-</div>
+    <div class="header">StructIA</div>
 
-<!-- LOGIN -->
-<div id="login" class="card page">
-    <h1>Login</h1>
-    <input id="login-username" type="text" class="input" placeholder="Usuário">
-    <input id="login-password" type="password" class="input" placeholder="Senha">
-    <button class="btn btn-primary" id="do-login">Entrar</button>
-    <button class="btn btn-ghost" id="back-login">Voltar</button>
-</div>
+    <!-- LOGIN -->
+    <div id="telaLogin" class="screen visible">
+        <h2>Login</h2>
 
-<!-- CADASTRO -->
-<div id="register" class="card page">
-    <h1>Criar Conta</h1>
-    <input id="reg-username" type="text" class="input" placeholder="Usuário">
-    <input id="reg-password" type="password" class="input" placeholder="Senha">
-    <button class="btn btn-secondary" id="do-register">Cadastrar</button>
-    <button class="btn btn-ghost" id="back-register">Voltar</button>
-</div>
+        <div class="input-group">
+            <label>Usuário</label>
+            <input type="text" id="loginUser">
+        </div>
 
-<!-- DASHBOARD -->
-<div id="dashboard" class="card page">
-    <h1>Dashboard</h1>
-    <p>Bem-vindo, <span id="user-name"></span></p>
-    <div class="stats">
-        <div>Resíduos registrados: <span id="residuos">0</span> kg</div>
-        <div>Coletas agendadas: <span id="coletas">0</span></div>
+        <div class="input-group">
+            <label>Senha</label>
+            <input type="password" id="loginSenha">
+        </div>
+
+        <button onclick="login()">Entrar</button>
+
+        <div class="link" onclick="go('telaCadastroEmpresa')">
+            Criar conta de empresa
+        </div>
     </div>
-    <button class="btn btn-primary" id="logout">Sair</button>
-</div>
 
+    <!-- CADASTRO DE EMPRESA -->
+    <div id="telaCadastroEmpresa" class="screen">
+        <div class="back-btn" onclick="go('telaLogin')">← Voltar</div>
+
+        <h2>Cadastro da Empresa (ADM)</h2>
+
+        <div class="input-group">
+            <label>Razão Social</label>
+            <input type="text" id="empresaRazao">
+        </div>
+
+        <div class="input-group">
+            <label>Nome Fantasia</label>
+            <input type="text" id="empresaFantasia">
+        </div>
+
+        <div class="input-group">
+            <label>CNPJ</label>
+            <input type="text" id="empresaCNPJ" maxlength="18">
+        </div>
+
+        <div class="input-group">
+            <label>Usuário Admin</label>
+            <input type="text" id="empresaUsuario">
+        </div>
+
+        <div class="input-group">
+            <label>Senha</label>
+            <input type="password" id="empresaSenha">
+        </div>
+
+        <div class="input-group">
+            <label>Confirmar Senha</label>
+            <input type="password" id="empresaSenha2">
+        </div>
+
+        <button onclick="cadastrarEmpresa()">Criar Empresa</button>
+    </div>
+
+    <!-- PAINEL ADMIN -->
+    <div id="telaPainelAdmin" class="screen">
+        <h2>Painel da Empresa</h2>
+        <p>Gerencie usuários internos:</p>
+
+        <button onclick="go('telaCadastroUsuario')">Cadastrar Usuário</button>
+        <button onclick="abrirListaUsuarios()">Listar Usuários</button>
+        <button onclick="go('telaUpload')">Enviar Foto para IA</button>
+
+        <div id="listaUsuarios" class="users-box"></div>
+
+        <button onclick="go('telaLogin')">Sair</button>
+    </div>
+
+    <!-- CADASTRO DE USUÁRIOS INTERNOS -->
+    <div id="telaCadastroUsuario" class="screen">
+        <div class="back-btn" onclick="go('telaPainelAdmin')">← Voltar</div>
+
+        <h2>Cadastrar Usuário Interno</h2>
+
+        <div class="input-group">
+            <label>CPF</label>
+            <input type="text" id="userCPF" maxlength="14">
+        </div>
+
+        <div class="input-group">
+            <label>Usuário</label>
+            <input type="text" id="userNome">
+        </div>
+
+        <div class="input-group">
+            <label>Senha</label>
+            <input type="password" id="userSenha">
+        </div>
+
+        <button onclick="cadastrarUsuario()">Cadastrar</button>
+    </div>
+
+    <!-- TELA LISTAR USUÁRIOS -->
+    <div id="telaListaUsuarios" class="screen">
+        <h2>Usuários Cadastrados</h2>
+
+        <div id="listaUsuariosBox" class="users-box"></div>
+
+        <button onclick="go('telaPainelAdmin')">Voltar</button>
+    </div>
+
+
+    <!-- TELA DE ENVIO DE IMAGEM -->
+    <div id="telaUpload" class="screen">
+        <div class="back-btn" onclick="go('telaPainelAdmin')">← Voltar</div>
+
+        <h2>Análise Estrutural</h2>
+        <p>Envie a foto da estrutura para identificar possíveis danos.</p>
+
+        <div class="upload-box">
+            <input type="file" id="uploadInput" accept="image/*" onchange="previewImage()">
+            <img id="preview" class="preview"/>
+        </div>
+
+        <button onclick="enviarParaIA()">Enviar para análise</button>
+        <div id="chatBox" class="chat-box"></div>
+    </div>
+
+</div>
 <script src="script.js"></script>
 </body>
 </html>
