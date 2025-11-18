@@ -157,7 +157,7 @@ async function enviarParaIA() {
 
         // Envia para o backend
         try {
-            const resp = await fetch("https://trabalho-de-aula.onrender.com", {
+            const resp = await fetch("https://backend-ih3b.onrender.com", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ imagem: base64Img }) // backend deve aceitar "imagem"
