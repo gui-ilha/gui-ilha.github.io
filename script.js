@@ -143,39 +143,38 @@ async function enviarParaIA() {
 
     const chatBox = document.getElementById("chatBox");
 
-    // Converte a imagem para Base64
     const reader = new FileReader();
     reader.onload = async function() {
         const base64Img = reader.result;
 
-        // Adiciona mensagem do usuário no chat
+        // Mensagem do usuário no chat
         const userMsg = document.createElement("div");
         userMsg.classList.add("msg", "user");
-        userMsg.textContent = "Imagem enviada para análise";
+        userMsg.textContent = "Imagem enviada para análise...";
         chatBox.appendChild(userMsg);
         chatBox.scrollTop = chatBox.scrollHeight;
 
-        // Envia para o backend
         try {
-            const resp = await fetch("https://backend-ih3b.onrender.com", {
+            const resp = await fetch("https://backend-ih3b.onrender.com/analise", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ imagem: base64Img }) // backend deve aceitar "imagem"
+                body: JSON.stringify({ imagem: base64Img })
             });
 
             const data = await resp.json();
 
-            // Mensagem da IA
             const gptMsg = document.createElement("div");
             gptMsg.classList.add("msg", "gpt");
-            gptMsg.textContent = data.resultado;
+            gptMsg.textContent = data.resultado || "Erro ao interpretar resposta";
             chatBox.appendChild(gptMsg);
             chatBox.scrollTop = chatBox.scrollHeight;
 
         } catch (err) {
-            alert("Erro ao enviar imagem para análise");
             console.error(err);
+            alert("Erro ao enviar imagem para análise.");
         }
     };
+
     reader.readAsDataURL(file);
 }
+
